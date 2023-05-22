@@ -1,0 +1,96 @@
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preload" href="https://fonts.googleapis.com" as="style">
+        <link href="https://fonts.googleapis.com/css2?family=VT323&family=Chivo+Mono&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="https://content.w3bg0r3.gallery/6451f27aaea0b8c8bbe6bb3b/MARBLED.ICO">
+        <title>{{state.title}}</title>
+        <link rel="stylesheet" type="text/css" href="https://content.w3bg0r3.gallery/index-stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="https://content.w3bg0r3.gallery/item-details-stylesheet.css">
+        <noscript>
+            <style>
+                .item {
+                    opacity: 1;
+                }
+            </style>
+        </noscript>
+        {{#if itemDetails}}
+            <style id="item-nav-toggle-rules">
+                {{#each itemDetails.filenames}}
+                    #button-{{@index}}:checked ~ #label-background-{{@index}} {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    #button-{{@index}}:checked ~ #filename-{{@index}} {
+                        display: block;
+                    }
+                {{/each}}
+            </style>
+        {{/if}}
+    </head>
+    <body>
+        <main>
+            <header>
+                <input type="checkbox" name="about-button" id="about-button">
+                <div id="about"><span id="about-text">w3bg0r3 is a small project dedicated to finding and cataloging interesting / cool / weird things from the internet (mostly images found on old websites in the wayback machine)<br><br>also on <a href="https://twitter.com/w3bg0r3">twitter</a>!</span></div>
+                <label id="about-button-label" for="about-button">about</label>
+                <span>w3bg</span><img id="logo" src="https://content.w3bg0r3.gallery/6451f27aaea0b8c8bbe6bb3b/MARBLED-upscaled.png"><span>r3</span>
+            </header>
+            <div id="items">
+                <div id="items-background"></div>
+            {{#each items}}
+                <div class="item" style="grid-column: auto / span {{this.displayWidth}}; grid-row: auto / span {{this.displayHeight}}">
+                    <noscript>
+                        <a href="/item/details/{{this._id}}">
+                    </noscript>
+                    <img id="x{{this._id}}" src="https://content.w3bg0r3.gallery/{{this._id}}/{{this.filenames.[1]}}" style="{{#if this.maxWidth}}max-width: {{this.maxWidth}};{{/if}}">
+                    <noscript>
+                        </a>
+                    </noscript>
+                </div>
+            {{/each}}
+            </div>
+            {{#if currentPage}}
+                <div class="page-navigation">
+                    {{#if previousPage}}
+                        <a href="/page/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                    {{/if}}
+                    {{#if nextPage}}
+                        <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                    {{/if}}
+                </div>
+            {{else}}
+                <div id="load-more-button" class="page-navigation">
+                    ⇩ load more ⇩
+                </div>
+                <noscript>
+                    <div class="page-navigation">
+                        {{#if nextPage}}
+                            <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                        {{/if}}
+                    </div>
+                </noscript>
+            {{/if}}
+        </main>
+        <div id="lightbox" {{#if itemDetails}}style="display: flex;"{{/if}}>
+            {{#if itemDetails}}
+                {{> item_details_partial}}
+            {{/if}}
+        </div>
+    </body>
+    <script>
+        const initialPath = '{{state.path}}';
+        const initialTitle = '{{state.title}}';
+        {{#if itemDetails}}
+            const initialItem = document.querySelector('#lightbox').innerHTML;
+        {{else}}
+            const initialItem = null;
+        {{/if}}
+        {{#if currentPage}}
+            let currentPage = '{{currentPage}}';
+        {{else}}
+            let currentPage = 1;
+        {{/if}}
+    </script>
+    <script defer src="https://content.w3bg0r3.gallery/index-script.js"></script>
+</html>

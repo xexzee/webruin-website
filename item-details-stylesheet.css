@@ -1,0 +1,120 @@
+#item-details-body {
+    align-items: center;
+    background: black;
+    color: white;
+    display: flex;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1rem;
+    height: 100svh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+#back-button {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.button {
+    display: none;
+}
+.button:checked + .image {
+    display: block;
+}
+.button-label {
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 2px solid white;
+    border-radius: 16px;
+    display: block;
+    height: 12px;
+    margin: 12px;
+    width: 12px;
+}
+.button-label:hover {
+    cursor: pointer;
+    border: 8px double white;
+    height: 0px;
+    width: 0px;
+}
+#item {
+    background: url(https://content.w3bg0r3.gallery/back01-2.jpg);
+    border: 4px double #000020;
+    cursor: default;
+    display: grid;
+    padding-top: calc(1rem + 44px);
+}
+.image {
+    box-sizing: border-box;
+    display: none;
+    max-height: 100%;
+    max-width: 100%;
+    padding: 12px;
+    position: absolute;
+}
+#images {
+    align-items: center;
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 4px double #000020;
+    display: flex;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    height: 512px;
+    justify-content: center;
+    margin: 4px;
+    padding: 12px;
+    position: relative;
+    width: 512px;
+}
+#item-nav {
+    display: flex;
+    grid-column: 1 / 1;
+    grid-row: 2 / 2;
+    margin: 0 auto;
+}
+#details {
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 4px double #000020;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2 / 2;
+    grid-row: 1 / 1;
+    margin: 4px;
+    max-width: 160px;
+    overflow-wrap: break-word;
+    padding: 12px;
+    text-align: right;
+}
+#links {
+    margin-top: auto;
+}
+#links a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.detail-header {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.label-background {
+    background: white;
+    border-radius: 16px;
+    bottom: -48px;
+    height: 16px;
+    margin: auto 12px 0 12px;
+    opacity: 0;
+    position: relative;
+    visibility: hidden;
+    width: 16px;
+}
+.filename {
+    top: 0;
+    padding: 12px 16px;
+    position: absolute;
+    transform: translateY(calc(-100% - 16px));
+    border: 4px double #000020;
+    margin: 4px;
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    display: none;
+    border-radius: 48px;
+}

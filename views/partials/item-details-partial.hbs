@@ -1,0 +1,40 @@
+<div id="item">
+    <div id="images">
+        {{#each itemDetails.filenames}}
+            {{#if @index}}
+                <input type="radio" id="button-{{@index}}" name="buttons" class="button">
+            {{else}}
+                <input type="radio" id="button-{{@index}}" name="buttons" class="button" checked="checked">
+            {{/if}}
+            <img src="https://content.w3bg0r3.gallery/{{#with ..}}{{itemDetails._id}}{{/with}}/{{this}}" id="image-{{@index}}" class="image">
+            <div id="label-background-{{@index}}" class="label-background"></div>
+            <span class="filename" id="filename-{{@index}}"><span class="detail-header">filename</span><span style="font-weight: bold;">:</span> {{this}}</span>
+        {{/each}}
+    </div>
+    <div id="item-nav">
+        {{#each itemDetails.filenames}}
+            <label for="button-{{@index}}" class="button-label" id="label-{{@index}}"></label>
+        {{/each}}
+    </div>
+    <div id="details">
+        <span class="detail-header">item name</span>
+        {{itemDetails.name}}
+        <br><br>
+        <span class="detail-header">added on</span>
+        {{itemDetails.dateAdded}}
+        <br><br>
+        <span class="detail-header">description</span>
+        {{itemDetails.description}}
+        <br><br>
+        <span class="detail-header">tags</span>
+        {{#each itemDetails.tags}}{{#if @index}},{{/if}} {{this}}{{/each}}
+        <br>
+        <div id="links">
+            <a href="{{itemDetails.websiteURL}}" target="_blank">site found on ⇨</a>
+            {{#if itemDetails.originalSourceURL}}
+                <br><br>
+                <a href="{{itemDetails.originalSourceURL}}" target="_blank">direct source ⇨</a>
+            {{/if}}
+        </div>
+    </div>
+</div>

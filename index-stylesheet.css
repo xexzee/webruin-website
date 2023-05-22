@@ -1,0 +1,155 @@
+#about {
+    background: url(https://content.w3bg0r3.gallery/back01-2.jpg);
+    border: 4px double #000020;
+    bottom: 0;
+    display: none;
+    left: -8px;
+    max-width: 200px;
+    position: absolute;
+    transform: translateY(calc(100% + 16px));
+    z-index: 1;
+}
+#about-button {
+    display: none;
+}
+#about-button:checked + #about {
+    display: block;
+}
+#about-button:checked ~ #about-button-label::after {
+    content: ' ▴';
+}
+#about-button:checked ~ #about-button-label::before {
+    content: '▴ ';
+}
+#about-button-label {
+    bottom: 0;
+    cursor: pointer;
+    font-size: 24px;
+    left: 0;
+    margin: 8px 12px;
+    position: absolute;
+}
+#about-button-label::after {
+    content: ' ▾';
+}
+#about-button-label::before {
+    content: '▾ ';
+}
+#about-text {
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 4px double #000020;
+    display: block;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1rem;
+    margin: 12px;
+    margin: 4px;
+    padding: 12px;
+    text-shadow: none;
+}
+#about-text a {
+    color: white;
+}
+body {
+    background-attachment: fixed;
+    background-image: url(https://content.w3bg0r3.gallery/newstars.gif);
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1rem;
+}
+header {
+    align-items: center;
+    background-image: url(https://content.w3bg0r3.gallery/back01-1.jpg);
+    border: 8px double #000020;
+    display: flex;
+    font-family: 'VT323', monospace;
+    font-size: 56px;
+    font-weight: bold;
+    height: 64px;
+    justify-content: center;
+    margin: 8px 0px;
+    padding: 8px;
+    position: relative;
+}
+header span, header label {
+    text-shadow:
+            4px 4px black,
+            -4px 4px black,
+            4px -4px black,
+            -4px -4px black,
+            0px 4px black,
+            0px -4px black,
+            4px 0px black,
+            -4px 0px black;
+    -webkit-user-select: none; 
+    -ms-user-select: none;
+    user-select: none;
+}
+.item {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+.item img:hover {
+    cursor: pointer;
+}
+#items {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-auto-rows: 8px;
+    grid-template-columns: repeat(auto-fill, 8px);
+    position: relative;
+}
+#items-background {
+    background: url(https://content.w3bg0r3.gallery/newtwinklestars.gif);
+    filter: brightness(0.75) contrast(2);
+    height: 100%;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+#logo {
+    height: 48px;
+    margin: 0 2px;
+    position: relative;
+    top: 4px;
+    width: 48px;
+}
+main {
+    margin: 0 auto;
+    max-width: 800px;
+}
+#lightbox {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    height: 100svh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100svw;
+}
+#lightbox:hover {
+    cursor: pointer;
+}
+#load-more-button {
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+.page-navigation {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 12px 0;
+    text-align: center;
+}
+.page-navigation a {
+    text-decoration: none;
+    color: white;
+}
