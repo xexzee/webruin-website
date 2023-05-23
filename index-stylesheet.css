@@ -129,7 +129,7 @@ main {
     align-items: center;
     background: rgba(0, 0, 0, 0.75);
     display: none;
-    height: 100svh;
+    height: 100lvh;
     justify-content: center;
     left: 0;
     position: fixed;
@@ -184,13 +184,6 @@ main {
     :root {
         --max-column-span: 55;
     }
-    header {
-        align-items: start;
-        height: 84px;
-    }
-    #logo {
-        top: 8px;
-    }
 }
 @media screen and (min-width: 480px) {
     :root {
@@ -225,5 +218,14 @@ main {
 @media screen and (min-width: 800px) {
     :root {
         --max-column-span: 100;
+    }
+}
+@media screen and (max-width: 440px) {
+    header {
+        align-items: start;
+        height: 84px;
+    }
+    #logo {
+        top: 8px;
     }
 }
