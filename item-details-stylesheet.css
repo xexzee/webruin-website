@@ -82,6 +82,7 @@
     max-width: 160px;
     max-height: 512px;
     overflow-wrap: break-word;
+    overflow-y: auto;
     padding: 12px;
     text-align: right;
 }
@@ -122,13 +123,12 @@
     overflow: hidden;
     white-space: nowrap;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 800px) and (orientation: portrait) {
     #details {
         grid-column: 1 / 1;
         grid-row: 3 / 3;
         height: 80px;
         max-width: none;
-        overflow-y: scroll;
         text-align: left;
         width: calc(100svw - 64px);
     }
@@ -143,5 +143,14 @@
     }
     #item {
         width: calc(100svw - 24px);
+    }
+}
+@media screen and (max-height: 512px) {
+    #details {
+        height: calc(100svh - 164px);
+    }
+    #images {
+        height: calc(100svh - 164px);
+        width: 256px;
     }
 }
