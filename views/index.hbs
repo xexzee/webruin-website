@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="https://content.w3bg0r3.gallery/item-details-stylesheet.css">
         <noscript>
             <style>
+                :root {
+
+                }
                 .item {
                     opacity: 1;
                 }
@@ -41,7 +44,7 @@
             <div id="items">
                 <div id="items-background"></div>
             {{#each items}}
-                <div class="item" style="grid-column: auto / span {{this.displayWidth}}; grid-row: auto / span {{this.displayHeight}}">
+                <div class="item" style="grid-column: auto / span min(var(--max-column-span), {{this.displayWidth}}); grid-row: auto / span {{this.displayHeight}}">
                     <noscript>
                         <a href="/item/details/{{this._id}}">
                     </noscript>
