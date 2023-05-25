@@ -60,7 +60,7 @@ body {
     background: url(https://content.w3bg0r3.gallery/newstars.gif);
     height: 100lvh;
     position: fixed;
-    width: 100lvh;
+    width: 100lvw;
     z-index: -1;
 }
 header {
