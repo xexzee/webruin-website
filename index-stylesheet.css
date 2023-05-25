@@ -141,6 +141,7 @@ main {
     position: fixed;
     top: 0;
     width: 100lvw;
+    z-index: 2;
 }
 #lightbox:hover {
     cursor: pointer;
