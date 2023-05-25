@@ -119,8 +119,7 @@
     background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
     display: none;
     border-radius: 48px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: auto;
     white-space: nowrap;
 }
 @media screen and (max-width: 800px) and (orientation: portrait) {
@@ -145,9 +144,13 @@
         width: calc(100svw - 24px);
     }
 }
-@media screen and (max-height: 512px) {
+@media screen and (max-height: 660px) and (orientation: landscape) {
     #details {
         height: calc(100svh - 164px);
+    }
+    .filename {
+        left: 0;
+        max-height: calc(100% + 160px - 12px);
     }
     #images {
         height: calc(100svh - 164px);

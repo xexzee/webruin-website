@@ -32,7 +32,7 @@ if(document.querySelector('#load-more-button')) {
                     document.querySelector('#load-more-button').style.opacity = 1;
                 } else {
                     document.querySelector('#load-more-button').style.display = 'none';
-                    document.querySelector('main').style.paddingBottom = '8px';
+                    document.querySelector('main').style.paddingBottom = '0px';
                 }
             }
         }

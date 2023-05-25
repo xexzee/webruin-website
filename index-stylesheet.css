@@ -50,13 +50,18 @@
     color: white;
 }
 body {
-    background-attachment: fixed;
-    background-image: url(https://content.w3bg0r3.gallery/newstars.gif);
     color: white;
     margin: 0;
     padding: 0;
     font-family: 'Chivo Mono', monospace;
     font-size: 1rem;
+}
+#body-background {
+    background: url(https://content.w3bg0r3.gallery/newstars.gif);
+    height: 100lvh;
+    position: fixed;
+    width: 100lvh;
+    z-index: -1;
 }
 header {
     align-items: center;
@@ -68,7 +73,7 @@ header {
     font-weight: bold;
     height: 64px;
     justify-content: center;
-    margin: 8px;
+    margin: 0 8px 8px 8px;
     padding: 8px;
     position: relative;
 }
@@ -124,6 +129,7 @@ header span, header label {
 main {
     margin: 0 auto;
     max-width: 800px;
+    padding: 8px 0 24px 0;
 }
 #lightbox {
     align-items: center;
@@ -148,7 +154,7 @@ main {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 16px 0 24px 0;
+    margin: 16px 0 0 0;
     text-align: center;
 }
 .page-navigation a {
