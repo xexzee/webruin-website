@@ -121,7 +121,7 @@ app.get('/page/:page', async (request, response) => {
 app.get('/search/:query', async (request, response) => {
     let query = encodeURIComponent(request.params.query);
     let items = await fetchItems(0, query);
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: query});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: decodeURIComponent(query)});
 });
 
 app.get('/search/:query/:page', async (request, response) => {
@@ -133,13 +133,13 @@ app.get('/search/:query/:page', async (request, response) => {
     let items = await fetchItems(page - 1, query);
     if(!items)
         response.status(404).send('PAGE NOT FOUND');
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query + '/' + page + '/'}, currentPage: parseInt(page), previousPage: previousPage(page), nextPage: await nextPage(page, query), query: query});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query + '/' + page + '/'}, currentPage: parseInt(page), previousPage: previousPage(page), nextPage: await nextPage(page, query), query: decodeURIComponent(query)});
 });
 
 app.post('/search', async (request, response) => {
     let query = encodeURIComponent(request.body['search-query']);
     let items = await fetchItems(0, query);
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: query});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: decodeURIComponent(query)});
 });
 
 app.listen(8080);
