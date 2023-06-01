@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv').config();
 const { MongoClient, ObjectId } = require('mongodb');
 const collection = new MongoClient(process.env.MONGODB_CONNECTIONSTRING)
@@ -11,6 +12,7 @@ const hbs = require('hbs');
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(mongoSanitize());
 app.set('view engine', 'hbs');
 hbs.registerPartials('./views/partials');
 
@@ -76,7 +78,7 @@ app.get('/', async (request, response) => {
 app.get('/item/details/:id', async (request, response) => {
     let id = null;
     try {
-        id = new ObjectId(encodeURIComponent(request.params.id));
+        id = new ObjectId(request.params.id);
     } catch(error) {
         response.status(400).send('MALFORMED ID PARAMETER');
     }
@@ -93,10 +95,12 @@ app.get('/item/details/:id', async (request, response) => {
 
 app.get('/item/:id', async (request, response) => {
     let id = null;
+    console.log(request.params.id);
     try {
-        id = new ObjectId(encodeURIComponent(request.params.id));
+        id = new ObjectId(request.params.id);
     } catch(error) {
         response.status(400).send('MALFORMED ID PARAMETER');
+        return;
     }
     let data = await collection.findOne({_id: new ObjectId(id)});
     data.dateAdded = data.dateAdded.toLocaleDateString('en-US');
@@ -109,7 +113,7 @@ app.get('/item/:id', async (request, response) => {
 });
 
 app.get('/page/:page', async (request, response) => {
-    let page = encodeURIComponent(request.params.page);
+    let page = request.params.page;
     if(!/^\d+$/.test(page) || page < 1)
         response.status(400).send('MALFORMED PAGE NUMBER');
     let items = await fetchItems(page - 1);
@@ -119,27 +123,27 @@ app.get('/page/:page', async (request, response) => {
 });
 
 app.get('/search/:query', async (request, response) => {
-    let query = encodeURIComponent(request.params.query);
+    let query = request.params.query;
     let items = await fetchItems(0, query);
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: decodeURIComponent(query)});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + encodeURIComponent(query)}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: query});
 });
 
 app.get('/search/:query/:page', async (request, response) => {
-    let query = encodeURIComponent(request.params.query);
-    let page = encodeURIComponent(request.params.page);
+    let query = request.params.query;
+    let page = request.params.page;
     if(!/^\d+$/.test(page) || page < 1)
         response.status(400).send('MALFORMED PAGE NUMBER');
     console.log(query);
     let items = await fetchItems(page - 1, query);
     if(!items)
         response.status(404).send('PAGE NOT FOUND');
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query + '/' + page + '/'}, currentPage: parseInt(page), previousPage: previousPage(page), nextPage: await nextPage(page, query), query: decodeURIComponent(query)});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + encodeURIComponent(query) + '/' + page + '/'}, currentPage: parseInt(page), previousPage: previousPage(page), nextPage: await nextPage(page, query), query: query});
 });
 
 app.post('/search', async (request, response) => {
-    let query = encodeURIComponent(request.body['search-query']);
+    let query = request.body['search-query'];
     let items = await fetchItems(0, query);
-    response.render('index', {items: items, state: {title: 'search', path: '/search/' + query}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: decodeURIComponent(query)});
+    response.render('index', {items: items, state: {title: 'search', path: '/search/' + encodeURIComponent(query)}, previousPage: previousPage(1), nextPage: await nextPage(1, query), query: query});
 });
 
 app.listen(8080);
