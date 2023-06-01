@@ -11,9 +11,6 @@
         <link rel="stylesheet" type="text/css" href="https://content.w3bg0r3.gallery/item-details-stylesheet.css">
         <noscript>
             <style>
-                :root {
-
-                }
                 .item {
                     opacity: 1;
                 }
@@ -40,7 +37,17 @@
                 <input type="checkbox" name="about-button" id="about-button">
                 <div id="about"><span id="about-text">w3bg0r3 is a small project dedicated to finding and cataloging interesting / cool / weird things from the internet (mostly images found on old websites in the wayback machine)<br><br>also on <a href="https://twitter.com/w3bg0r3">twitter</a>!</span></div>
                 <label id="about-button-label" for="about-button">about</label>
-                <span>w3bg</span><img id="logo" src="https://content.w3bg0r3.gallery/6451f27aaea0b8c8bbe6bb3b/MARBLED-upscaled.png"><span>r3</span>
+                <a href="/"><span>w3bg</span><img id="logo" src="https://content.w3bg0r3.gallery/6451f27aaea0b8c8bbe6bb3b/MARBLED-upscaled.png"><span>r3</span></a>
+                <form action="/search" method="post" id="search">
+                    <label id="search-label" for="search-query">search:</label>
+                    <label id="search-icon" for="search-query">🔎︎<span style="font-size: 24px">:</span></label>
+                    {{#if query}}
+                        <input type="text" name="search-query" id="search-query" placeholder="{{query}}">
+                    {{else}}
+                        <input type="text" name="search-query" id="search-query">
+                    {{/if}}
+                    <input type="submit" id="search-query-submit-button"><label for="search-query-submit-button" id="search-query-submit-label">⇨</span>
+                </form>
             </header>
             <div id="items">
                 <div id="items-background"></div>
@@ -59,20 +66,34 @@
             {{#if currentPage}}
                 <div class="page-navigation">
                     {{#if previousPage}}
-                        <a href="/page/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                        {{#if query}}
+                            <a href="/search/{{query}}/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                        {{else}}
+                            <a href="/page/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                        {{/if}}
                     {{/if}}
                     {{#if nextPage}}
-                        <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                        {{#if query}}
+                            <a href="/search/{{query}}/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                        {{else}}
+                            <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                        {{/if}}
                     {{/if}}
                 </div>
             {{else}}
-                <div id="load-more-button" class="page-navigation">
-                    ⇩ load more ⇩
-                </div>
+                {{#if nextPage}}
+                    <div id="load-more-button" class="page-navigation">
+                        ⇩ load more ⇩
+                    </div>
+                {{/if}}
                 <noscript>
                     <div class="page-navigation">
                         {{#if nextPage}}
-                            <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                            {{#if query}}
+                                <a href="/search/{{query}}/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                            {{else}}
+                                <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                            {{/if}}
                         {{/if}}
                     </div>
                 </noscript>
@@ -96,6 +117,11 @@
             let currentPage = '{{currentPage}}';
         {{else}}
             let currentPage = 1;
+        {{/if}}
+        {{#if query}}
+            const initialQuery = '{{query}}'
+        {{else}}
+            const initialQuery = null;
         {{/if}}
     </script>
     <script defer src="https://content.w3bg0r3.gallery/index-script.js"></script>

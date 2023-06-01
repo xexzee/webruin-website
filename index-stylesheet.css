@@ -77,6 +77,10 @@ header {
     padding: 8px;
     position: relative;
 }
+header a {
+    color: white;
+    text-decoration: none;
+}
 header span, header label {
     text-shadow:
             4px 4px black,
@@ -90,6 +94,17 @@ header span, header label {
     -webkit-user-select: none; 
     -ms-user-select: none;
     user-select: none;
+}
+input[type='text'] {
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 4px double #000020;
+    color: white;
+    font-family: 'Chivo Mono', monospace;
+    height: 24px;
+    width: 120px;
+}
+input[type='text']:focus {
+    outline: none;
 }
 .item {
     align-items: center;
@@ -129,7 +144,7 @@ header span, header label {
 main {
     margin: 0 auto;
     max-width: 800px;
-    padding: 8px 0 24px 0;
+    padding: 8px 0 20px 0;
 }
 #lightbox {
     align-items: center;
@@ -161,6 +176,36 @@ main {
 .page-navigation a {
     text-decoration: none;
     color: white;
+}
+#search {
+    bottom: 0;
+    display: flex;
+    font-size: 24px;
+    margin: 8px 12px;
+    position: absolute;
+    right: 0;
+    text-align: left;
+}
+#search-icon {
+    display: none;
+    font-size: 18px;
+    margin: auto 12px 0 0;
+}
+#search-label {
+    position: relative;
+    margin: auto 12px 0 0;
+}
+#search-query-submit-button {
+    display: none;
+}
+#search-query-submit-label {
+    background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
+    border: 4px double #000020;
+    border-left: none;
+    font-size: 16px;
+    height: 16px;
+    position: relative;
+    width: 24px;
 }
 @media screen and (min-width: 280px) {
     :root {
@@ -227,12 +272,17 @@ main {
         --max-column-span: 100;
     }
 }
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 700px) {
     header {
         align-items: start;
-        height: 84px;
+        height: 80px;
     }
-    #logo {
-        top: 8px;
+}
+@media screen and (max-width: 460px) {
+    #search-label {
+        display: none;
+    }
+    #search-icon {
+        display: inline;
     }
 }

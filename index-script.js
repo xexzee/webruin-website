@@ -9,8 +9,12 @@ if(document.querySelector('#load-more-button')) {
         document.querySelector('#load-more-button').style.visibility = 'hidden';
         document.querySelector('#load-more-button').style.opacity = 0;
         let httpRequest = new XMLHttpRequest();
-        let url = '/page/' + (currentPage + 1);
         currentPage++;
+        let url = null;
+        if(initialQuery)
+            url = '/search/' + initialQuery + '/' + currentPage;
+        else
+            url = '/page/' + currentPage;
         httpRequest.open('GET', url);
         httpRequest.responseType = 'document';
         httpRequest.send();
