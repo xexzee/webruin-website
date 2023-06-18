@@ -19,7 +19,8 @@ hbs.registerPartials('./views/partials');
 async function nextPage(currentPage, query) {
     return new Promise(async resolve => {
         if(query) {
-            if((process.env.NUMBER_OF_ITEMS_TO_LOAD * (parseInt(currentPage))) < await collection.countDocuments({$text: {$search: query}}))
+            let editedQuery = query.replace(/([a-z0-9]+)/gi, '"$1"');
+            if((process.env.NUMBER_OF_ITEMS_TO_LOAD * (parseInt(currentPage))) < await collection.countDocuments({$text: {$search: editedQuery}}))
                 resolve(parseInt(currentPage) + 1);
             else
                 resolve(null);
@@ -43,7 +44,8 @@ async function fetchItems(page, query) {
     return new Promise(async resolve => {
         let items = null;
         if(query) {
-            items = await collection.find({$text: {$search: query}}).sort({ score: { $meta: 'textScore'}, dateAdded: -1 }).limit(parseInt(process.env.NUMBER_OF_ITEMS_TO_LOAD)).skip(process.env.NUMBER_OF_ITEMS_TO_LOAD * page).toArray();
+            let editedQuery = query.replace(/([a-z0-9]+)/gi, '"$1"');
+            items = await collection.find({$text: {$search: editedQuery}}).sort({ score: { $meta: 'textScore'}, dateAdded: -1 }).limit(parseInt(process.env.NUMBER_OF_ITEMS_TO_LOAD)).skip(process.env.NUMBER_OF_ITEMS_TO_LOAD * page).toArray();
         }
         else {
             items = await collection.find().sort({ dateAdded: -1 }).limit(parseInt(process.env.NUMBER_OF_ITEMS_TO_LOAD)).skip(process.env.NUMBER_OF_ITEMS_TO_LOAD * page).toArray();

@@ -150,7 +150,8 @@
     }
     .filename {
         left: 0;
-        max-height: calc(100% + 160px - 12px);
+        max-width: calc(100% + 160px - 12px);
+        transform: translate(calc((480px - 100%) / 2), calc(-100% - 16px));
     }
     #images {
         height: calc(100svh - 164px);

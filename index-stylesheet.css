@@ -202,6 +202,7 @@ main {
     background: url(https://content.w3bg0r3.gallery/back01-2-dark.jpg);
     border: 4px double #000020;
     border-left: none;
+    font-family: 'Chivo Mono', 'monospace';
     font-size: 16px;
     height: 16px;
     position: relative;
@@ -275,10 +276,13 @@ main {
 @media screen and (max-width: 700px) {
     header {
         align-items: start;
-        height: 80px;
+        height: 84px;
     }
 }
 @media screen and (max-width: 460px) {
+    input[type="text"] {
+        width: 80px;
+    }
     #search-label {
         display: none;
     }
