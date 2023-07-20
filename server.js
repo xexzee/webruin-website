@@ -74,7 +74,7 @@ async function fetchItems(page, query) {
 }
 
 app.get('/', async (request, response) => {
-    response.render('index', {items: await fetchItems(0), state: {title: 'w3bg0r3', path: '/'}, previousPage: previousPage(1), nextPage: await nextPage(1)});
+    response.render('index', {items: await fetchItems(0), state: {title: 'web ruin', path: '/'}, previousPage: previousPage(1), nextPage: await nextPage(1)});
 });
 
 app.get('/item/details/:id', async (request, response) => {
@@ -95,6 +95,7 @@ app.get('/item/details/:id', async (request, response) => {
     }
 });
 
+// TODO: fix history bug when navigating directly to an item as the first page a user loads
 app.get('/item/:id', async (request, response) => {
     let id = null;
     console.log(request.params.id);
