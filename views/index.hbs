@@ -14,6 +14,15 @@
                 .item {
                     opacity: 1;
                 }
+                #page-background {
+                    opacity: 1;
+                }
+                #items-background {
+                    opacity: 1;
+                }
+                header {
+                    opacity: 1;
+                }
             </style>
         </noscript>
         {{#if itemDetails}}
@@ -31,61 +40,48 @@
         {{/if}}
     </head>
     <body>
-        <div id="body-background"></div>
-        <main>
-            <header>
-                <input type="checkbox" name="about-button" id="about-button">
-                <div id="about"><span id="about-text">"web ruin" is a project about cataloging images from old webpages, as a way of looking back at what internet culture was like through the years, by preserving small pieces of it.<br><br>also on:<br><a href="https://cohost.org/webruin" style="text-decoration: underline;line-height: normal;">cohost</a></span></div>
-                <label id="about-button-label" for="about-button">about</label>
-                <a href="/"><span>web</span><img id="logo" src="https://content.webru.in/6451f27aaea0b8c8bbe6bb3b/MARBLED-upscaled.png"><span>ruin</span></a>
-                <form action="/search" method="post" id="search">
-                    {{#if query}}
-                        <input type="text" name="search-query" id="search-query" value="{{query}}" placeholder="search...">
-                    {{else}}
-                        <input type="text" name="search-query" id="search-query" placeholder="search...">
-                    {{/if}}
-                    <input type="submit" id="search-query-submit-button"><label for="search-query-submit-button" id="search-query-submit-label">⇨</span>
-                </form>
-            </header>
-            <div id="items">
-                <div id="items-background" style="top: -120px"></div>
-            {{#each items}}
-                <div class="item" style="grid-column: auto / span min(var(--max-column-span), {{this.displayWidth}}); grid-row: auto / span {{this.displayHeight}}">
-                    <noscript>
-                        <a href="/item/details/{{this._id}}">
-                    </noscript>
-                    <img id="x{{this._id}}" src="https://content.webru.in/{{this._id}}/{{this.filenames.[1]}}" style="{{#if this.maxWidth}}max-width: {{this.maxWidth}};{{/if}}">
-                    <noscript>
-                        </a>
-                    </noscript>
+        <div id="page-content">
+            <main>
+                <div id="background-layers">
+                    <div id="page-background"></div>
+                    <div id="items-background"></div>
                 </div>
-            {{/each}}
-            </div>
-            {{#if currentPage}}
-                <div class="page-navigation">
-                    {{#if previousPage}}
+                <header>
+                    <input type="checkbox" name="about-button" id="about-button">
+                    <div id="about"><span id="about-text">"web ruin" is a project about cataloging images from old webpages, as a way of looking back at what internet culture was like through the years, by preserving small pieces of it.<br><br>also on:<br><a href="https://cohost.org/webruin" style="text-decoration: underline;line-height: normal;">cohost</a></span></div>
+                    <label id="about-button-label" for="about-button">about</label>
+                    <a href="/"><span>web</span><img id="logo" src="https://content.webru.in/6451f27aaea0b8c8bbe6bb3b/MARBLED-upscaled.png"><span>ruin</span></a>
+                    <form action="/search" method="post" id="search">
                         {{#if query}}
-                            <a href="/search/{{query}}/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                            <input type="text" name="search-query" id="search-query" value="{{query}}" placeholder="search...">
                         {{else}}
-                            <a href="/page/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                            <input type="text" name="search-query" id="search-query" placeholder="search...">
                         {{/if}}
-                    {{/if}}
-                    {{#if nextPage}}
-                        {{#if query}}
-                            <a href="/search/{{query}}/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
-                        {{else}}
-                            <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
-                        {{/if}}
-                    {{/if}}
-                </div>
-            {{else}}
-                {{#if nextPage}}
-                    <div id="load-more-button" class="page-navigation">
-                        ⇩ load more ⇩
+                        <input type="submit" id="search-query-submit-button"><label for="search-query-submit-button" id="search-query-submit-label">⇨</span>
+                    </form>
+                </header>
+                <div id="items">
+                {{#each items}}
+                    <div class="item" style="grid-column: auto / span min(var(--max-column-span), {{this.displayWidth}}); grid-row: auto / span {{this.displayHeight}}">
+                        <noscript>
+                            <a href="/item/details/{{this._id}}">
+                        </noscript>
+                        <img id="x{{this._id}}" src="https://content.webru.in/{{this._id}}/{{this.filenames.[1]}}" style="{{#if this.maxWidth}}max-width: {{this.maxWidth}};{{/if}}">
+                        <noscript>
+                            </a>
+                        </noscript>
                     </div>
-                {{/if}}
-                <noscript>
+                {{/each}}
+                </div>
+                {{#if currentPage}}
                     <div class="page-navigation">
+                        {{#if previousPage}}
+                            {{#if query}}
+                                <a href="/search/{{query}}/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                            {{else}}
+                                <a href="/page/{{previousPage}}" style="margin-right: auto;" id="previous-page-button">⇦ page {{previousPage}}</a>
+                            {{/if}}
+                        {{/if}}
                         {{#if nextPage}}
                             {{#if query}}
                                 <a href="/search/{{query}}/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
@@ -94,9 +90,26 @@
                             {{/if}}
                         {{/if}}
                     </div>
-                </noscript>
-            {{/if}}
-        </main>
+                {{else}}
+                    {{#if nextPage}}
+                        <div id="load-more-button" class="page-navigation">
+                            ⇩ load more ⇩
+                        </div>
+                    {{/if}}
+                    <noscript>
+                        <div class="page-navigation">
+                            {{#if nextPage}}
+                                {{#if query}}
+                                    <a href="/search/{{query}}/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                                {{else}}
+                                    <a href="/page/{{nextPage}}" style="margin-left: auto;" id="next-page-button">page {{nextPage}} ⇨</a>
+                                {{/if}}
+                            {{/if}}
+                        </div>
+                    </noscript>
+                {{/if}}
+            </main>
+        </div>
         <div id="lightbox" {{#if itemDetails}}style="display: flex;"{{/if}}>
             {{#if itemDetails}}
                 {{> item_details_partial}}

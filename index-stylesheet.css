@@ -50,19 +50,20 @@
 #about-text a {
     color: white;
 }
+#background-layers {
+    transform-style: preserve-3d;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    width: 100vw;
+}
 body {
+    background-color: black;
     color: white;
     margin: 0;
     padding: 0;
     font-family: 'Chivo Mono', monospace;
     font-size: 1rem;
-}
-#body-background {
-    background: url(https://content.webru.in/newstars.gif);
-    height: 150lvh;
-    position: fixed;
-    width: 100lvw;
-    z-index: -1;
 }
 header {
     align-items: center;
@@ -75,8 +76,11 @@ header {
     height: 44px;
     justify-content: center;
     margin: 0 8px 8px 8px;
+    opacity: 0;
     padding: 8px;
     position: relative;
+    transition: opacity 0.25s;
+    width: min(calc(100% - 48px), 752px);
 }
 header a {
     color: white;
@@ -132,13 +136,21 @@ header span, header label {
     margin: 0;
     overflow: hidden;
     position: relative;
+    width: min(100%, 744px);
 }
 #items-background {
     background: url(https://content.webru.in/newtwinklestars.gif);
+    background-clip: content-box;
+    box-sizing: border-box;
     filter: brightness(0.75) contrast(2);
-    height: 150%;
-    opacity: 0.5;
+    height: 100%;
+    left: 50%;
+    opacity: 0;
+    padding: 0 calc((100lvw - 744px) / 2);
     position: absolute;
+    top: 50%;
+    transform: translateZ(-1px) scale(2) translate(-50%, -50%);
+    transition: opacity 0.5s;
     width: 100%;
     z-index: -1;
 }
@@ -146,12 +158,12 @@ header span, header label {
     align-items: center;
     background: rgba(0, 0, 0, 0.75);
     display: none;
-    height: 100lvh;
+    height: 100%;
     justify-content: center;
     left: 0;
     position: fixed;
     top: 0;
-    width: 100lvw;
+    width: 100%;
     z-index: 2;
 }
 #lightbox:hover {
@@ -175,9 +187,34 @@ header span, header label {
     width: 44px;
 }
 main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    max-width: 800px;
     padding: 8px 0 20px 0;
+    transform-style: preserve-3d;
+    width: 100%;
+}
+#page-background {
+    background: url(https://content.webru.in/newstars.gif);
+    height: 100%;
+    image-rendering: -webkit-optimize-contrast;
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateZ(-3px) scale(4) translate(-50%, -50%);
+    transition: opacity 1s;
+    width: 100lvw;
+    z-index: -1;
+}
+#page-content {
+    height: 100lvh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    perspective: 1px;
+    perspective-origin: bottom right;
+    width: 100lvw;
 }
 .page-navigation {
     align-items: center;
